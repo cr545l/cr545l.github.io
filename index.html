@@ -1,1 +1,205 @@
-"Home" 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donghun Lim - Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            opacity: 0.8;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1em;
+            color: #888;
+            font-weight: 400;
+        }
+        
+        .contact {
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+        
+        .contact a {
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .contact a:hover {
+            border-bottom-color: #333;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 1em;
+            color: #888;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card-title {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+        
+        .card-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .card-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .card-link {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9em;
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .card-link:hover {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+        
+        .accent {
+            color: #007AFF;
+        }
+        
+        .footer {
+            text-align: center;
+            padding-top: 60px;
+            color: #999;
+            font-size: 0.85em;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="Logo_300x300_Alpha.png" alt="Logo">
+            </div>
+            <h1>Donghun Lim</h1>
+            <p class="subtitle">Developer</p>
+            <p class="contact">
+                <a href="mailto:cr545l@gmail.com">cr545l@gmail.com</a>
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Documents</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">Privacy Policies</h3>
+                    <p class="card-description">
+                        Application privacy policy documents
+                    </p>
+                    <div class="card-links">
+                        <a href="privacy-policy-2048lite.html" class="card-link">2048 LITE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Donghun Lim. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html> 
