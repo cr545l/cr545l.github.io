@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXIF Copy Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .drop-area.drag-over {
+            border-color: #007bff;
+            background-color: #e3f2fd;
+        }
+
+        .drop-area:hover {
+            border-color: #007bff;
+        }
+
+        .drop-text {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-button {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .file-button:hover {
+            background: #0056b3;
+        }
+
+        .order-section {
+            margin-bottom: 30px;
+        }
+
+        .order-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .order-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .order-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .order-item {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .order-item.selected {
+            background: #e3f2fd;
+            border-color: #007bff;
+        }
+
+        .order-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .control-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .control-button:hover {
+            background: #545b62;
+        }
+
+        .control-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .reset-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .reset-button:hover {
+            background: #1e7e34;
+        }
+
+        .result-section {
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .result-text {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            min-height: 60px;
+            font-family: monospace;
+            color: #495057;
+            white-space: pre-wrap;
+        }
+
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .copy-button:hover {
+            background: #1e7e34;
+        }
+
+        .copy-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .supported-formats {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .order-container {
+                justify-content: center;
+            }
+
+            .order-controls {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">EXIF Copy Tool</h1>
+
+        <div class="drop-area" id="dropArea">
+            <div class="drop-text">
+                이미지 파일을 여기에 드래그하거나<br>
+                아래 버튼을 클릭하세요
+            </div>
+            <button class="file-button" onclick="document.getElementById('fileInput').click()">
+                파일 선택
+            </button>
+            <input type="file" id="fileInput" class="file-input" accept="image/*">
+            <div class="supported-formats">
+                지원 형식: JPG, JPEG, TIFF, HEIC, WebP 등
+            </div>
+        </div>
+
+        <div class="order-section">
+            <h2 class="order-title">EXIF 정보 순서 설정</h2>
+            <p class="order-description">클릭하여 선택하고 ← → 버튼으로 순서를 변경하세요:</p>
+
+            <div class="order-container" id="orderContainer">
+                <!-- 동적으로 생성됩니다 -->
+            </div>
+
+            <div class="order-controls">
+                <button class="control-button" id="leftButton" onclick="moveLeft()" disabled>←</button>
+                <button class="control-button" id="rightButton" onclick="moveRight()" disabled>→</button>
+                <button class="reset-button" onclick="resetOrder()">기본값으로 리셋</button>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <h3 class="result-title">추출된 EXIF 정보</h3>
+            <div class="result-text" id="resultText">파일을 선택하면 EXIF 정보가 여기에 표시됩니다.</div>
+            <button class="copy-button" id="copyButton" onclick="copyToClipboard()" disabled>클립보드에 복사</button>
+        </div>
+
+        <div id="message"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/exifr/dist/lite.umd.js"></script>
+    <script>
+        // EXIF 항목 설정
+        const exifLabels = {
+            camera: '카메라',
+            lens: '렌즈',
+            aperture: '조리개',
+            shutter: '셔터',
+            iso: 'ISO',
+            focal_length: '초점거리'
+        };
+
+        // 기본 순서
+        let defaultOrder = ['camera', 'lens', 'aperture', 'shutter', 'iso', 'focal_length'];
+        let currentOrder = [...defaultOrder];
+        let selectedIndex = -1;
+        let extractedExif = null;
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrder();
+            createOrderItems();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+
+            // 드래그 앤 드롭 이벤트
+            dropArea.addEventListener('dragover', handleDragOver);
+            dropArea.addEventListener('dragleave', handleDragLeave);
+            dropArea.addEventListener('drop', handleDrop);
+
+            // 파일 선택 이벤트
+            fileInput.addEventListener('change', handleFileSelect);
+
+            // 키보드 이벤트
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.classList.remove('drag-over');
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                processFile(files[0]);
+            }
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (selectedIndex === -1) return;
+
+            if (e.key === 'ArrowLeft') {
+                moveLeft();
+                e.preventDefault();
+            } else if (e.key === 'ArrowRight') {
+                moveRight();
+                e.preventDefault();
+            }
+        }
+
+        async function processFile(file) {
+            // 이미지 파일인지 확인
+            if (!file.type.startsWith('image/')) {
+                showMessage('이미지 파일만 선택할 수 있습니다.', 'error');
+                return;
+            }
+
+            showMessage('EXIF 정보를 추출하는 중...', 'info');
+
+            try {
+                // exifr을 사용하여 EXIF 데이터 추출
+                const exifData = await exifr.parse(file, {
+                    tiff: true,
+                    exif: true,
+                    gps: false,
+                    interop: false,
+                    ifd1: false
+                });
+
+                console.log('모든 EXIF 데이터:', exifData);
+
+                const formattedData = extractExifData(exifData);
+                console.log('추출된 EXIF 데이터:', formattedData);
+
+                if (Object.keys(formattedData).length === 0) {
+                    showMessage('EXIF 정보를 찾을 수 없습니다. 개발자 도구 콘솔을 확인하세요.', 'error');
+                    document.getElementById('resultText').textContent = 'EXIF 정보가 없습니다.';
+                    document.getElementById('copyButton').disabled = true;
+                    return;
+                }
+
+                extractedExif = formattedData;
+                const formattedString = formatExifString(formattedData, currentOrder);
+
+                document.getElementById('resultText').textContent = formattedString;
+                document.getElementById('copyButton').disabled = false;
+
+                showMessage('EXIF 정보를 성공적으로 추출했습니다!', 'success');
+
+            } catch (error) {
+                console.error('EXIF 추출 오류:', error);
+                showMessage('EXIF 정보 추출 중 오류가 발생했습니다.', 'error');
+                document.getElementById('resultText').textContent = 'EXIF 정보 추출 실패';
+                document.getElementById('copyButton').disabled = true;
+            }
+        }
+
+        function extractExifData(exifData) {
+            const data = {};
+
+            // 카메라 모델
+            if (exifData.Model) {
+                data.camera = exifData.Model.trim();
+            }
+
+            // 렌즈 모델 - exifr은 더 많은 렌즈 태그를 지원
+            const lensModel = exifData.LensModel ||
+                            exifData.LensMake ||
+                            exifData.Lens ||
+                            exifData.LensInfo ||
+                            exifData.LensSpecification;
+
+            if (lensModel) {
+                if (Array.isArray(lensModel) && lensModel.length >= 2) {
+                    // LensSpecification의 경우 배열 형태 [최소초점거리, 최대초점거리, 최소조리개, 최대조리개]
+                    const minFocal = parseFloat(lensModel[0]);
+                    const maxFocal = parseFloat(lensModel[1]);
+                    if (!isNaN(minFocal) && !isNaN(maxFocal)) {
+                        if (minFocal === maxFocal) {
+                            data.lens = `${Math.round(minFocal)}mm`;
+                        } else {
+                            data.lens = `${Math.round(minFocal)}-${Math.round(maxFocal)}mm`;
+                        }
+                    }
+                } else if (typeof lensModel === 'string') {
+                    data.lens = lensModel.trim();
+                } else if (typeof lensModel === 'number') {
+                    data.lens = `${lensModel}mm`;
+                }
+            }
+
+            // 조리개
+            if (exifData.FNumber) {
+                const fValue = parseFloat(exifData.FNumber);
+                if (fValue % 1 === 0) {
+                    data.aperture = `F${Math.round(fValue)}`;
+                } else {
+                    data.aperture = `F${fValue.toFixed(1)}`;
+                }
+            }
+
+            // 셔터 스피드
+            if (exifData.ExposureTime) {
+                const exposureTime = parseFloat(exifData.ExposureTime);
+                if (exposureTime >= 1) {
+                    if (exposureTime % 1 === 0) {
+                        data.shutter = `${Math.round(exposureTime)}s`;
+                    } else {
+                        data.shutter = `${exposureTime.toFixed(1)}s`;
+                    }
+                } else {
+                    data.shutter = `1/${Math.round(1/exposureTime)}s`;
+                }
+            }
+
+            // ISO
+            const iso = exifData.ISO ||
+                       exifData.ISOSpeedRatings ||
+                       exifData.PhotographicSensitivity ||
+                       exifData.RecommendedExposureIndex;
+            if (iso) {
+                data.iso = `ISO ${iso}`;
+            }
+
+            // 초점거리
+            if (exifData.FocalLength) {
+                const fl = parseFloat(exifData.FocalLength);
+                if (fl % 1 === 0) {
+                    data.focal_length = `${Math.round(fl)}mm`;
+                } else {
+                    data.focal_length = `${fl.toFixed(1)}mm`;
+                }
+            }
+
+            return data;
+        }
+
+        function formatExifString(exifData, order) {
+            const parts = [];
+
+            for (const key of order) {
+                if (exifData[key]) {
+                    parts.push(exifData[key]);
+                }
+            }
+
+            return parts.join(' | ');
+        }
+
+        function createOrderItems() {
+            const container = document.getElementById('orderContainer');
+            container.innerHTML = '';
+
+            currentOrder.forEach((key, index) => {
+                const item = document.createElement('div');
+                item.className = 'order-item';
+                item.textContent = exifLabels[key];
+                item.dataset.key = key;
+                item.dataset.index = index;
+                item.onclick = () => selectItem(index);
+                container.appendChild(item);
+            });
+
+            updateButtonStates();
+        }
+
+        function selectItem(index) {
+            const items = document.querySelectorAll('.order-item');
+
+            // 이전 선택 해제
+            items.forEach(item => item.classList.remove('selected'));
+
+            // 새로운 선택
+            items[index].classList.add('selected');
+            selectedIndex = index;
+
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            const leftButton = document.getElementById('leftButton');
+            const rightButton = document.getElementById('rightButton');
+
+            leftButton.disabled = selectedIndex <= 0;
+            rightButton.disabled = selectedIndex >= currentOrder.length - 1 || selectedIndex === -1;
+        }
+
+        function moveLeft() {
+            if (selectedIndex > 0) {
+                // 배열에서 위치 교환
+                [currentOrder[selectedIndex], currentOrder[selectedIndex - 1]] =
+                [currentOrder[selectedIndex - 1], currentOrder[selectedIndex]];
+
+                selectedIndex--;
+                createOrderItems();
+                selectItem(selectedIndex);
+                saveOrder();
+                updateResult();
+            }
+        }
+
+        function moveRight() {
+            if (selectedIndex < currentOrder.length - 1 && selectedIndex !== -1) {
+                // 배열에서 위치 교환
+                [currentOrder[selectedIndex], currentOrder[selectedIndex + 1]] =
+                [currentOrder[selectedIndex + 1], currentOrder[selectedIndex]];
+
+                selectedIndex++;
+                createOrderItems();
+                selectItem(selectedIndex);
+                saveOrder();
+                updateResult();
+            }
+        }
+
+        function resetOrder() {
+            currentOrder = [...defaultOrder];
+            selectedIndex = -1;
+            createOrderItems();
+            saveOrder();
+            updateResult();
+            showMessage('순서가 기본값으로 리셋되었습니다.', 'success');
+        }
+
+        function updateResult() {
+            if (extractedExif) {
+                const formattedString = formatExifString(extractedExif, currentOrder);
+                document.getElementById('resultText').textContent = formattedString;
+            }
+        }
+
+        function copyToClipboard() {
+            const resultText = document.getElementById('resultText').textContent;
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(resultText).then(() => {
+                    showMessage('클립보드에 복사되었습니다!', 'success');
+                }).catch(() => {
+                    fallbackCopyToClipboard(resultText);
+                });
+            } else {
+                fallbackCopyToClipboard(resultText);
+            }
+        }
+
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+                showMessage('클립보드에 복사되었습니다!', 'success');
+            } catch (err) {
+                showMessage('복사에 실패했습니다.', 'error');
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+
+            // 3초 후 메시지 제거
+            setTimeout(() => {
+                messageDiv.textContent = '';
+                messageDiv.className = '';
+            }, 3000);
+        }
+
+        function saveOrder() {
+            localStorage.setItem('exifOrder', JSON.stringify(currentOrder));
+        }
+
+        function loadOrder() {
+            const saved = localStorage.getItem('exifOrder');
+            if (saved) {
+                try {
+                    currentOrder = JSON.parse(saved);
+                } catch (e) {
+                    currentOrder = [...defaultOrder];
+                }
+            }
+        }
+    </script>
+</body>
+</html>
