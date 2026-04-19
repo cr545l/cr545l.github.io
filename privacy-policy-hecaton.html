@@ -202,56 +202,97 @@
                 <ul>
                     <li>본 방침은 임동훈(이하 "개발자")이 제공하는 <strong>HECATON</strong> 애플리케이션(이하 "본 앱") 및 관련 서비스에 적용됩니다.</li>
                     <li>본 방침을 개정하는 경우, 본 정책 문서의 링크를 통해 사전에 고지합니다.</li>
-                    <li><strong>시행일:</strong> 2026년 1월 31일</li>
+                    <li><strong>시행일:</strong> 2026년 4월 26일</li>
                 </ul>
-                
+
                 <h2>개인정보 수집 및 이용 여부</h2>
                 <ul>
-                    <li><strong>HECATON</strong>은 개발자가 직접 사용자의 개인을 식별할 수 있는 개인정보를 수집·이용·공유하지 않습니다.</li>
-                    <li>회원가입/로그인, 프로필, 연락처/주소록, 사진·미디어, 마이크/카메라, 위치정보, 결제 정보 등의 개인·민감 정보는 수집하지 않습니다.</li>
+                    <li>본 앱 자체는 개발자가 사용자의 개인을 식별할 수 있는 개인정보를 직접 수집·이용·공유하지 않습니다.</li>
+                    <li>다만 선택적 기능인 <strong>플러그인 리뷰 서비스</strong>를 이용하는 경우에 한하여, 아래 "플러그인 리뷰 서비스" 항목에 기재된 정보를 수집·처리합니다.</li>
+                    <li>회원가입/로그인(본 앱 자체), 프로필, 연락처/주소록, 사진·미디어, 마이크/카메라, 위치정보, 결제 정보 등의 개인·민감 정보는 수집하지 않습니다.</li>
                 </ul>
-                
+
+                <h2>플러그인 리뷰 서비스</h2>
+                <ul>
+                    <li>사용자가 플러그인 리뷰 서비스를 이용(리뷰 작성·수정·삭제)하는 경우에 한하여, 개발자가 운영하는 서버에 아래 정보가 저장됩니다.</li>
+                    <li><strong>수집 항목:</strong>
+                        <ul>
+                            <li>GitHub 사용자 고유 ID(숫자), GitHub 로그인 이름(공개 표시용)</li>
+                            <li>사용자가 작성한 평점(1~5) 및 리뷰 본문(최대 1,000자)</li>
+                            <li>리뷰 대상 플러그인 ID, 플러그인 버전, Hecaton 버전</li>
+                            <li>리뷰 작성/수정 시각</li>
+                            <li>서버 접근 IP 주소(오남용 방지 및 요청 레이트 제한 목적의 로그)</li>
+                        </ul>
+                    </li>
+                    <li><strong>수집 목적:</strong>
+                        <ul>
+                            <li>플러그인에 대한 리뷰·평점을 사용자 간에 제공·공유</li>
+                            <li>중복 리뷰 식별 및 본인 리뷰 편집·삭제 권한 확인</li>
+                            <li>비정상 트래픽·악용 방지</li>
+                        </ul>
+                    </li>
+                    <li><strong>공개 범위:</strong>
+                        <ul>
+                            <li>GitHub 로그인 이름, 평점, 리뷰 본문, 플러그인 버전, 작성 일시는 누구나 조회 가능한 공개 API를 통해 제공됩니다.</li>
+                            <li>GitHub 사용자 고유 ID(숫자)와 IP 주소는 외부에 공개되지 않습니다.</li>
+                        </ul>
+                    </li>
+                    <li><strong>인증 방식:</strong> 리뷰 작성·삭제 시 GitHub OAuth 토큰으로 사용자를 확인하며, 토큰 자체는 서버에 저장하지 않고 검증 목적으로만 일시적으로 사용됩니다.</li>
+                </ul>
+
                 <h2>광고 서비스 관련</h2>
                 <ul>
                     <li>본 앱은 광고 서비스를 사용하지 않으며, 광고 식별자 및 관련 정보를 수집하지 않습니다.</li>
                 </ul>
-                
+
                 <h2>민감한 사용자 및 기기 데이터 처리</h2>
                 <ul>
                     <li>건강/피트니스, 금융/결제, 생체정보, 위치, 마이크/카메라, SMS/통화기록, 연락처, 달력, 파일/미디어 등 민감 데이터에 접근하거나 이를 수집·처리·전송하지 않습니다.</li>
                 </ul>
-                
+
                 <h2>권한 사용</h2>
                 <ul>
-                    <li><strong>HECATON</strong>은 개인정보 수집을 위한 특별한 권한을 요청하지 않습니다.</li>
+                    <li><strong>HECATON</strong>은 개인정보 수집을 위한 특별한 시스템 권한을 요청하지 않습니다.</li>
                 </ul>
-                
+
                 <h2>데이터 보관 및 파기</h2>
                 <ul>
-                    <li>개발자는 개인정보를 수집하지 않으므로 보관·보유·파기 대상 데이터가 존재하지 않습니다.</li>
-                    <li>사용자 또는 기기를 식별할 수 있는 데이터를 저장하지 않습니다.</li>
+                    <li><strong>리뷰 데이터</strong>(평점, 본문, GitHub 식별자, 플러그인·Hecaton 버전, 작성·수정 시각)는 사용자가 직접 삭제하거나 삭제를 요청하기 전까지 서비스 제공 목적 달성에 필요한 범위에서 보관됩니다.</li>
+                    <li>사용자는 언제든지 본 앱의 리뷰 삭제 기능 또는 서버 API를 통해 자신의 리뷰를 직접 삭제할 수 있습니다.</li>
+                    <li><strong>서버 접근 로그</strong>(IP 주소 포함)는 개발자가 별도로 수집·장기 보관하지 않으며, Cloudflare Workers 플랫폼의 기본 로그 정책에 따라 Cloudflare 측에서 일시적으로 기록·처리됩니다. 요청 레이트 제한을 위한 IP 카운터는 짧은 시간 창(수십 초 수준) 내에서만 유지되고 자동 소멸합니다.</li>
+                    <li>위 항목 외에는 사용자 또는 기기를 식별할 수 있는 데이터를 저장하지 않습니다.</li>
+                    <li>리뷰 삭제 또는 관련 문의는 <a href="mailto:cr545l@gmail.com">cr545l@gmail.com</a> 으로 접수하실 수 있습니다.</li>
                 </ul>
-                
+
                 <h2>제3자 제공, 공유, 처리위탁</h2>
                 <ul>
-                    <li>개발자는 수집한 데이터를 제3자에게 제공·판매·공유하지 않습니다.</li>
+                    <li>개발자는 수집한 데이터를 제3자에게 판매하지 않습니다.</li>
+                    <li>다만 플러그인 리뷰 서비스 운영을 위해 다음 업체에 데이터 처리를 위탁합니다.
+                        <ul>
+                            <li><strong>Cloudflare, Inc.</strong> — 서버 호스팅(Workers), 데이터베이스(D1), 캐시, 요청 레이트 리미트 제공</li>
+                            <li><strong>GitHub, Inc.</strong> — 리뷰 작성 시 OAuth 토큰 검증 및 사용자 신원 확인을 위한 API 제공</li>
+                        </ul>
+                    </li>
+                    <li>리뷰 본문, 평점, GitHub 로그인 이름 등 "플러그인 리뷰 서비스"의 공개 범위에 명시된 항목은 공개 API를 통해 누구나 열람할 수 있습니다.</li>
                 </ul>
-                
+
                 <h2>아동 개인정보</h2>
                 <ul>
                     <li>아동을 대상으로 개인정보를 수집하지 않습니다.</li>
                 </ul>
-                
+
                 <h2>보안 조치</h2>
                 <ul>
-                    <li>개인정보를 처리하지 않더라도, 외부 통신·저장 최소화 등 기술·관리적 보안 노력을 기울입니다.</li>
+                    <li>외부 통신·저장 최소화 등 기술·관리적 보안 노력을 기울입니다.</li>
+                    <li>플러그인 리뷰 서비스는 HTTPS 통신, GitHub OAuth 토큰 기반 인증, 요청 레이트 제한, 입력 길이 제한 등의 조치를 적용합니다.</li>
+                    <li>GitHub OAuth 토큰은 서버에 저장하지 않습니다.</li>
                 </ul>
-                
+
                 <h2>고지 의무</h2>
                 <ul>
                     <li>본 방침의 중요한 변경사항은 시행 최소 7일 전에 본 정책 문서를 통해 안내합니다.</li>
                 </ul>
-                
+
                 <h2>개인정보보호 책임자</h2>
                 <ul>
                     <li><strong>성명:</strong> 임동훈</li>
@@ -269,56 +310,97 @@
                 <ul>
                     <li>This policy applies to the <strong>HECATON</strong> application (the "App") and related services provided by Donghun Lim (the "Developer").</li>
                     <li>If this policy is amended, we will provide prior notice via the link to this policy.</li>
-                    <li><strong>Effective date:</strong> January 31, 2026</li>
+                    <li><strong>Effective date:</strong> April 26, 2026</li>
                 </ul>
-                
+
                 <h2>Collection and Use of Personal Information</h2>
                 <ul>
-                    <li>The <strong>HECATON</strong> developer does not directly collect, use, or share any personal information that can identify a user.</li>
-                    <li>We do not collect any personal or sensitive information such as sign-up/login data, profiles, contacts/address book, photos/media, microphone/camera, location data, or payment information.</li>
+                    <li>The <strong>HECATON</strong> application itself does not directly collect, use, or share any personal information that can identify a user.</li>
+                    <li>However, when and only when you use the optional <strong>Plugin Review Service</strong>, the information described under the "Plugin Review Service" section below is collected and processed.</li>
+                    <li>We do not collect any personal or sensitive information such as sign-up/login data for the app itself, profiles, contacts/address book, photos/media, microphone/camera, location data, or payment information.</li>
                 </ul>
-                
+
+                <h2>Plugin Review Service</h2>
+                <ul>
+                    <li>When you use the plugin review service (submit, edit, or delete a review), the following information is stored on the Developer's server.</li>
+                    <li><strong>Items collected:</strong>
+                        <ul>
+                            <li>GitHub numeric user ID and GitHub login (publicly displayed)</li>
+                            <li>Rating (1–5) and review body (up to 1,000 characters)</li>
+                            <li>Plugin ID, plugin version, and Hecaton version</li>
+                            <li>Creation and modification timestamps</li>
+                            <li>Request IP address (used in logs for abuse prevention and rate limiting)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Purposes:</strong>
+                        <ul>
+                            <li>Providing and sharing plugin reviews and ratings between users</li>
+                            <li>Identifying duplicate reviews and authorizing edits/deletions by the original author</li>
+                            <li>Preventing abnormal traffic and abuse</li>
+                        </ul>
+                    </li>
+                    <li><strong>Disclosure scope:</strong>
+                        <ul>
+                            <li>GitHub login, rating, review body, plugin version, and creation date are accessible through a publicly available API.</li>
+                            <li>The numeric GitHub user ID and IP addresses are not publicly disclosed.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Authentication:</strong> A GitHub OAuth token is used to verify the user when submitting or deleting a review. The token itself is not stored on the server and is used transiently for verification only.</li>
+                </ul>
+
                 <h2>Advertising Services</h2>
                 <ul>
                     <li>This app does not use any advertising services and does not collect advertising identifiers or related information.</li>
                 </ul>
-                
+
                 <h2>Processing of Sensitive User and Device Data</h2>
                 <ul>
                     <li>We do not access, collect, process, or transmit sensitive data such as health/fitness, financial/payment information, biometric data, location, microphone/camera, SMS/call logs, contacts, calendar, or files/media.</li>
                 </ul>
-                
+
                 <h2>Use of Permissions</h2>
                 <ul>
-                    <li><strong>HECATON</strong> does not request any special permissions for personal data collection.</li>
+                    <li><strong>HECATON</strong> does not request any special system permissions for personal data collection.</li>
                 </ul>
-                
+
                 <h2>Data Retention and Deletion</h2>
                 <ul>
-                    <li>Since the developer does not collect personal information, there is no data to store, retain, or delete.</li>
-                    <li>The developer does not store user- or device-identifiable data.</li>
+                    <li><strong>Review data</strong> (rating, body, GitHub identifier, plugin/Hecaton version, creation and modification timestamps) is retained until you delete it yourself or request deletion, for as long as necessary to provide the service.</li>
+                    <li>You may delete your own reviews at any time through the review deletion feature in the app or the server API.</li>
+                    <li><strong>Server access logs</strong> (including IP addresses) are not separately collected or retained long-term by the Developer. They are handled transiently by Cloudflare in accordance with the default log policy of the Cloudflare Workers platform. Per-IP counters used for rate limiting are maintained only within a short time window (on the order of tens of seconds) and expire automatically.</li>
+                    <li>Apart from the items above, the Developer does not store data that can identify a user or device.</li>
+                    <li>Deletion requests and related inquiries may be sent to <a href="mailto:cr545l@gmail.com">cr545l@gmail.com</a>.</li>
                 </ul>
-                
+
                 <h2>Sharing with Third Parties</h2>
                 <ul>
-                    <li>The developer does not provide, sell, or share collected data with third parties.</li>
+                    <li>The Developer does not sell any collected data to third parties.</li>
+                    <li>To operate the plugin review service, data processing is entrusted to the following providers:
+                        <ul>
+                            <li><strong>Cloudflare, Inc.</strong> — server hosting (Workers), database (D1), cache, and request rate limiting</li>
+                            <li><strong>GitHub, Inc.</strong> — OAuth token verification and user identity confirmation via API when submitting reviews</li>
+                        </ul>
+                    </li>
+                    <li>Items listed under the "Plugin Review Service" disclosure scope (review body, rating, GitHub login, etc.) are viewable by anyone through the public API.</li>
                 </ul>
-                
+
                 <h2>Children's Personal Information</h2>
                 <ul>
                     <li>We do not collect personal information from children.</li>
                 </ul>
-                
+
                 <h2>Security Measures</h2>
                 <ul>
-                    <li>Even though we do not process personal information, we apply technical and administrative safeguards such as minimizing external communications.</li>
+                    <li>We apply technical and administrative safeguards such as minimizing external communications and storage.</li>
+                    <li>The plugin review service uses HTTPS, GitHub OAuth token-based authentication, request rate limiting, and input length limits.</li>
+                    <li>GitHub OAuth tokens are not stored on the server.</li>
                 </ul>
-                
+
                 <h2>Notification Obligations</h2>
                 <ul>
                     <li>We will provide notice of material changes to this policy at least seven (7) days prior to their effective date via this policy document.</li>
                 </ul>
-                
+
                 <h2>Privacy Officer</h2>
                 <ul>
                     <li><strong>Name:</strong> Donghun Lim</li>
