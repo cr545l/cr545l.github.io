@@ -202,14 +202,36 @@
                 <ul>
                     <li>본 방침은 임동훈(이하 "개발자")이 제공하는 <strong>HECATON</strong> 애플리케이션(이하 "본 앱") 및 관련 서비스에 적용됩니다.</li>
                     <li>본 방침을 개정하는 경우, 본 정책 문서의 링크를 통해 사전에 고지합니다.</li>
-                    <li><strong>시행일:</strong> 2026년 4월 26일</li>
+                    <li><strong>시행일:</strong> 2026년 4월 26일 (최종 개정: 2026년 6월 7일 — 라이선스 인증 및 구매 관련 내용 추가)</li>
                 </ul>
 
                 <h2>개인정보 수집 및 이용 여부</h2>
                 <ul>
-                    <li>본 앱 자체는 개발자가 사용자의 개인을 식별할 수 있는 개인정보를 직접 수집·이용·공유하지 않습니다.</li>
-                    <li>다만 선택적 기능인 <strong>플러그인 리뷰 서비스</strong>를 이용하는 경우에 한하여, 아래 "플러그인 리뷰 서비스" 항목에 기재된 정보를 수집·처리합니다.</li>
-                    <li>회원가입/로그인(본 앱 자체), 프로필, 연락처/주소록, 사진·미디어, 마이크/카메라, 위치정보, 결제 정보 등의 개인·민감 정보는 수집하지 않습니다.</li>
+                    <li>본 앱은 아래 "<strong>라이선스 인증 및 구매</strong>" 및 "<strong>플러그인 리뷰 서비스</strong>" 항목에 명시된 경우를 제외하고는, 사용자의 개인을 식별할 수 있는 개인정보를 수집·이용·공유하지 않습니다.</li>
+                    <li>유료 라이선스 인증을 위해 라이선스 키 등 일부 정보가 결제대행사로 전송되며, 구매자 이름·이메일이 사용자 기기에 저장됩니다. 자세한 내용은 아래 "라이선스 인증 및 구매" 항목을 참조하십시오.</li>
+                    <li>선택적 기능인 플러그인 리뷰 서비스를 이용하는 경우에 한하여, 아래 "플러그인 리뷰 서비스" 항목에 기재된 정보를 수집·처리합니다.</li>
+                    <li>프로필, 연락처/주소록, 사진·미디어, 마이크/카메라, 위치정보는 수집하지 않으며, 신용카드 번호 등 결제수단 정보는 결제대행사(Lemonsqueezy)가 처리하므로 개발자가 접근·저장하지 않습니다.</li>
+                </ul>
+
+                <h2>라이선스 인증 및 구매</h2>
+                <ul>
+                    <li>본 앱은 유료 라이선스로 제공되며, 구매·라이선스 키 발급·결제는 결제대행사인 <strong>Lemonsqueezy</strong>(Lemon Squeezy, LLC)를 통해 이루어집니다. Lemonsqueezy가 등록판매자(Merchant of Record)로서 결제·세금·환불을 처리하며, 개발자는 신용카드 등 결제수단 정보에 접근하지 않습니다.</li>
+                    <li><strong>라이선스 인증 시 전송되는 정보:</strong> 라이선스 키의 활성화·검증·해제를 위해 아래 정보가 Lemonsqueezy License API(<code>api.lemonsqueezy.com</code>)로 전송됩니다.
+                        <ul>
+                            <li>라이선스 키</li>
+                            <li>기기 식별용 인스턴스 이름(<code>hecaton-desktop</code>) 및 활성화 시 발급되는 인스턴스 ID</li>
+                        </ul>
+                    </li>
+                    <li><strong>기기에 저장되는 정보:</strong> 인증 응답으로 수신한 아래 정보는 사용자 기기의 운영체제 보안 저장소(Windows 자격 증명 관리자 / macOS 키체인 / Linux libsecret)에 저장되며, 개발자 서버로는 전송되지 않습니다.
+                        <ul>
+                            <li>라이선스 키, 인스턴스 ID</li>
+                            <li>구매자 이름 및 이메일(Lemonsqueezy 구매 정보 기준)</li>
+                            <li>라이선스 만료일, 최종 검증 시각</li>
+                        </ul>
+                    </li>
+                    <li><strong>이용 목적:</strong> 라이선스 유효성 확인, 기기별 활성화 관리, 오프라인 사용 지원(마지막 온라인 검증 이후 일정 유예기간 동안 기기에 캐시된 인증 상태를 사용).</li>
+                    <li><strong>해제 및 삭제:</strong> 앱 내 라이선스 비활성화(Deactivate) 기능을 사용하면 해당 기기의 활성화가 해제되고 위 정보가 기기에서 삭제됩니다.</li>
+                    <li>구매·결제·환불 과정에서 Lemonsqueezy가 처리하는 개인정보에는 Lemonsqueezy의 개인정보처리방침이 적용됩니다.</li>
                 </ul>
 
                 <h2>플러그인 리뷰 서비스</h2>
@@ -267,8 +289,9 @@
                 <h2>제3자 제공, 공유, 처리위탁</h2>
                 <ul>
                     <li>개발자는 수집한 데이터를 제3자에게 판매하지 않습니다.</li>
-                    <li>다만 플러그인 리뷰 서비스 운영을 위해 다음 업체에 데이터 처리를 위탁합니다.
+                    <li>다만 라이선스 판매 및 플러그인 리뷰 서비스 운영을 위해 다음 업체에 데이터 처리를 위탁합니다.
                         <ul>
+                            <li><strong>Lemon Squeezy, LLC</strong> — 상품 판매, 결제 처리(등록판매자), 라이선스 키 발급 및 라이선스 인증 API 제공</li>
                             <li><strong>Cloudflare, Inc.</strong> — 서버 호스팅(Workers), 데이터베이스(D1), 캐시, 요청 레이트 리미트 제공</li>
                             <li><strong>GitHub, Inc.</strong> — 리뷰 작성 시 OAuth 토큰 검증 및 사용자 신원 확인을 위한 API 제공</li>
                         </ul>
@@ -310,14 +333,36 @@
                 <ul>
                     <li>This policy applies to the <strong>HECATON</strong> application (the "App") and related services provided by Donghun Lim (the "Developer").</li>
                     <li>If this policy is amended, we will provide prior notice via the link to this policy.</li>
-                    <li><strong>Effective date:</strong> April 26, 2026</li>
+                    <li><strong>Effective date:</strong> April 26, 2026 (Last revised: June 7, 2026 — added Licensing and Activation disclosures)</li>
                 </ul>
 
                 <h2>Collection and Use of Personal Information</h2>
                 <ul>
-                    <li>The <strong>HECATON</strong> application itself does not directly collect, use, or share any personal information that can identify a user.</li>
-                    <li>However, when and only when you use the optional <strong>Plugin Review Service</strong>, the information described under the "Plugin Review Service" section below is collected and processed.</li>
-                    <li>We do not collect any personal or sensitive information such as sign-up/login data for the app itself, profiles, contacts/address book, photos/media, microphone/camera, location data, or payment information.</li>
+                    <li>Except as described in the "<strong>Licensing and Activation</strong>" and "<strong>Plugin Review Service</strong>" sections below, the <strong>HECATON</strong> application does not collect, use, or share personal information that can identify a user.</li>
+                    <li>For paid license activation, certain information such as the license key is transmitted to our payment provider, and the purchaser's name and email are stored on your device. See the "Licensing and Activation" section below for details.</li>
+                    <li>When and only when you use the optional Plugin Review Service, the information described under the "Plugin Review Service" section below is collected and processed.</li>
+                    <li>We do not collect profiles, contacts/address book, photos/media, microphone/camera, or location data. Payment method information such as credit card numbers is processed by our payment provider (Lemonsqueezy) and is never accessed or stored by the Developer.</li>
+                </ul>
+
+                <h2>Licensing and Activation</h2>
+                <ul>
+                    <li>The app is provided under a paid license. Purchases, license key issuance, and payment are handled through our payment provider, <strong>Lemonsqueezy</strong> (Lemon Squeezy, LLC). Lemonsqueezy acts as the Merchant of Record and processes payments, taxes, and refunds; the Developer does not access payment method information such as credit card numbers.</li>
+                    <li><strong>Information sent during license verification:</strong> To activate, validate, and deactivate a license key, the following is sent to the Lemonsqueezy License API (<code>api.lemonsqueezy.com</code>):
+                        <ul>
+                            <li>License key</li>
+                            <li>An instance name identifying the device (<code>hecaton-desktop</code>) and an instance ID issued upon activation</li>
+                        </ul>
+                    </li>
+                    <li><strong>Information stored on your device:</strong> The following, received in the verification response, is stored in your operating system's secure credential store (Windows Credential Manager / macOS Keychain / Linux libsecret) and is not transmitted to the Developer's servers:
+                        <ul>
+                            <li>License key and instance ID</li>
+                            <li>Purchaser name and email (as provided by Lemonsqueezy purchase records)</li>
+                            <li>License expiry date and last validation time</li>
+                        </ul>
+                    </li>
+                    <li><strong>Purposes:</strong> Verifying license validity, managing per-device activation, and supporting offline use (a cached verification state is used for a limited grace period after the last successful online check).</li>
+                    <li><strong>Deactivation and deletion:</strong> Using the in-app Deactivate function releases the activation for that device and deletes the above information from the device.</li>
+                    <li>Personal information processed by Lemonsqueezy during purchase, payment, and refunds is governed by Lemonsqueezy's own privacy policy.</li>
                 </ul>
 
                 <h2>Plugin Review Service</h2>
@@ -375,8 +420,9 @@
                 <h2>Sharing with Third Parties</h2>
                 <ul>
                     <li>The Developer does not sell any collected data to third parties.</li>
-                    <li>To operate the plugin review service, data processing is entrusted to the following providers:
+                    <li>To sell licenses and operate the plugin review service, data processing is entrusted to the following providers:
                         <ul>
+                            <li><strong>Lemon Squeezy, LLC</strong> — product sales, payment processing (Merchant of Record), license key issuance, and the license verification API</li>
                             <li><strong>Cloudflare, Inc.</strong> — server hosting (Workers), database (D1), cache, and request rate limiting</li>
                             <li><strong>GitHub, Inc.</strong> — OAuth token verification and user identity confirmation via API when submitting reviews</li>
                         </ul>
